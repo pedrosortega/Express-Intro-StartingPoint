@@ -39,6 +39,20 @@ router.patch('/:id', (req, res) => {
 });
 // Delete a task by id
 
+router.delete("/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const existingTask = Task.findByPk(id);
+  if(!existingTask) {
+    return res.status(404).json({ error: "Task not found"});
+  }
+  try {
+    Task.delete(id);
+  } catch (error) {
+    res.status(404).json({ error: error.message});
+  }
+})
+
+
 // Create a new task
 
 module.exports = router;
