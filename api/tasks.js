@@ -26,7 +26,17 @@ router.get("/:id", (req, res) => {
 });
 
 // Patch a task by id
+router.patch('/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const updates = req.body; 
 
+  try {
+    Task.update(id, updates);
+    res.json(Task.findAll()); 
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+});
 // Delete a task by id
 
 // Create a new task
