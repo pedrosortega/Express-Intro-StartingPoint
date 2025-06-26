@@ -16,7 +16,7 @@ router.patch('/:id', (req, res) => {
   const updates = req.body; 
 
   try {
-    const updatedTask = Task.update(id, updates);
+    Task.update(id, updates);
     res.json(Task.findAll()); 
   } catch (error) {
     res.status(404).json({ error: error.message });
