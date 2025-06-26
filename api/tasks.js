@@ -4,11 +4,14 @@ const { Task } = require("../dummy-database");
 
 // GET all tasks
 router.get("/", (req, res) => {
-   const tasks = Task.findAll();
-   if (!tasks) {
-    return res.status(404).json({ error: "Task not found" });
+
+  const tasks = Task.findAll();
+  try {
+    res.send(tasks);
+  } catch {
+    res.status(501).send("Not implemented");
   }
-  res.json(tasks);
+
 });
 
 // GET a single task by id
